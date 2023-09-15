@@ -1,6 +1,7 @@
 'use client'
 import React, { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import styles from './style.module.scss'
 const CubeModel = () => {
   return (
@@ -17,6 +18,7 @@ const CubeModel = () => {
 function Cube() {
 
     const mesh = useRef()
+    const texture = new TextureLoader().load('/cube.jpg')
     //* This hook allows you to execute code on every rendered frame, like running effects, updating controls, and so on.
     useFrame((state:any, delta:any) => { 
         mesh.current.rotation.x += delta * 0.25
@@ -24,10 +26,12 @@ function Cube() {
         mesh.current.rotation.z += delta * 0.25
       })
 
+    const texture_1 = new TextureLoader().load('/assets/color.png') // It is a basic red color image texture 
+
   return (
     <mesh ref={mesh}>
         <boxGeometry args={["2.5","2.5","2.5"]}/> {/* This basically scale it up to 2.5x2.5x2.5  */}
-        <meshStandardMaterial color={"orange"}/>  {/* This basically add color only visible when light apply on cube */}
+        <meshStandardMaterial map={texture_1}/>  {/* This basically add color only visible when light apply on cube */}
     </mesh>
   )
 }
