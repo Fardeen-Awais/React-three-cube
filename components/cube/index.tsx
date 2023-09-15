@@ -6,6 +6,7 @@ const CubeModel = () => {
   return (
     <div className={styles.main}>
         <Canvas>
+            <ambientLight intensity={"2"}/>
             <Cube/>
         </Canvas>
     </div>
@@ -15,7 +16,8 @@ const CubeModel = () => {
 function Cube() {
   return (
     <mesh>
-        <boxGeometry/>
+        <boxGeometry args={["2.5","2.5","2.5"]}/> {/* This basically scale it up to 2.5x2.5x2.5  */}
+        <meshStandardMaterial color={"orange"}/>  {/* This basically add color only visible when light apply on cube */}
     </mesh>
   )
 }
